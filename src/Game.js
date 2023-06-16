@@ -13,7 +13,7 @@ const Boomerang = require('./game-models/Boomerang');
 
 class Game {
   constructor({ trackLength }) {
-    this.trackLength = trackLength;
+    this.trackLength = trackLength;//h
     this.boomerang = new Boomerang(trackLength);
     this.hero = new Hero({ position: 0, boomerang: this.boomerang });
     this.enemy = new Enemy(trackLength);
