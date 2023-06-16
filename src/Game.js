@@ -1,7 +1,6 @@
 // Импортируем всё необходимое.
 // Или можно не импортировать,
 // а передавать все нужные объекты прямо из run.js при инициализации new Game().
-
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
 // const Boomerang = require('./game-models/Boomerang');
@@ -13,7 +12,7 @@ const Boomerang = require('./game-models/Boomerang');
 
 class Game {
   constructor({ trackLength }) {
-    this.trackLength = trackLength;//h
+    this.trackLength = trackLength; //h
     this.boomerang = new Boomerang(trackLength);
     this.hero = new Hero({ position: 0, boomerang: this.boomerang });
     this.enemy = new Enemy(trackLength);
@@ -28,7 +27,10 @@ class Game {
     this.track = new Array(this.trackLength).fill(' ');
     this.track[this.hero.position] = this.hero.skin;
     this.track[this.enemy.position] = this.enemy.skin; // Добавьте эту строку
-    if (this.hero.boomerang.position >= 0 && this.hero.boomerang.position < this.trackLength) {
+    if (
+      this.hero.boomerang.position >= 0 &&
+      this.hero.boomerang.position < this.trackLength
+    ) {
       this.track[this.hero.boomerang.position] = this.hero.boomerang.skin;
     }
   }
