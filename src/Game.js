@@ -20,6 +20,7 @@ class Game {
     this.view = new View(this);
     this.track = [];
     this.regenerateTrack();
+    this.score = 0;
   }
 
   regenerateTrack() {
@@ -60,13 +61,14 @@ class Game {
   handleCollisions() {
     if (this.hero.position === this.enemy.position) {
       this.hero.die();
+      
     }
 
     if (this.boomerang.position === this.enemy.position) {
       this.enemy.die();
-      // Обнуляем позицию бумеранга после столкновения с врагом
-      // this.boomerang.position = -1;
-      this.enemy = new Enemy(this.trackLength); // Создаем нового врага
+      this.score = this.score + 10;
+      this.boomerang.position = -1;
+      /* this.enemy = new Enemy(this.trackLength); // Создаем нового врага */
     }
   }
 }
