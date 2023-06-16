@@ -30,8 +30,9 @@ class Enemy {
   }
 
   die() {
-    this.position = '?';
-    console.log('Enemy is Dead!');
+    this.position = 30;
+    console.log('Enemy is dead!');
+
   }
 }
 
