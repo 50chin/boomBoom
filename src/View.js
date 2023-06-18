@@ -6,7 +6,7 @@ class View {
 
   render() {
     const yourTeamName = 'USB';
-    const gamerName = process.argv[2];
+    // const gamerName = process.argv[2];
     const livesView = '💖 ';
 
     // Тут всё рисуем.
@@ -17,7 +17,7 @@ class View {
     console.log('\n\n');
     console.log(`Created by ${yourTeamName} with love`);
     console.log(`Player's score ${this.game.score}`);
-    console.log(`Player nickname ${gamerName}`);
+    console.log(`Player nickname ${this.game.hero.name}`);
   }
 }
 
