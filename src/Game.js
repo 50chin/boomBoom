@@ -4,12 +4,12 @@
 
 const sound = require('play-sound')((opts = {}));
 
+const readlineSync = require('readline-sync');
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
 // const Boomerang = require('./game-models/Boomerang');
 const View = require('./View');
 const Boomerang = require('./game-models/Boomerang');
-const readlineSync = require('readline-sync');
 
 let playerName = '';
 // Основной класс игры.
@@ -17,7 +17,6 @@ let playerName = '';
 
 class Game {
   constructor({ trackLength }) {
-
     this.trackLength = trackLength; // h
 
     this.boomerang = new Boomerang(trackLength);
@@ -25,6 +24,7 @@ class Game {
     this.enemy = new Enemy(trackLength);
     this.view = new View(this);
     this.track = [];
+    // this.track2 = [];
     this.regenerateTrack();
     this.score = 0;
   }
@@ -77,12 +77,18 @@ class Game {
     if (this.hero.position === this.enemy.position) {
       this.check();
     }
-
-    if (this.boomerang.position === this.enemy.position) {
+    if (
+      this.boomerang.position === this.enemy.position ||
+      this.boomerang.position === this.enemy.position + 1
+    ) {
       this.enemy.die();
+
+      if (this.enemy.position === this.track.length - 1) {
+        this.enemy.die()
+      }
       // console.log(`${this.lives}`);
       this.score += 1;
-      this.boomerang.position = -1;
+      this.boomerang.position = this.hero.position + 1;
       /* this.enemy = new Enemy(this.trackLength); // Создаем нового врага */
     }
   }

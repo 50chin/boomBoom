@@ -5,24 +5,22 @@ class View {
   }
 
   render() {
-
-    const yourTeamName = 'USB';
     // const gamerName = process.argv[2];
-    const livesView = '💖 ';
-    const yourTeamName = 'United Sexy Boys';
-
+    const livesView = '❤ ';
+    const yourTeamName = 'Dream Team';
 
     // Тут всё рисуем.
     console.clear();
-    console.log(`${livesView.repeat(this.game.hero.lives.length)}`);
+    console.log(`Lives: ${livesView.repeat(this.game.hero.lives.length - 1)}`);
     console.log('\n');
     console.log(this.game.track.join(''));
-    console.log('\n\n');
+    // console.log(this.game.track2.join(''));
+    console.log('\n');
 
-    console.log(`Created by ${yourTeamName} with love`);
-    console.log(`Player's score ${this.game.score}`);
-    console.log(`Player nickname ${this.game.hero.name}`);
-    console.log(` Игра cоздана конмадой ${yourTeamName}`);
+    console.log(`Player's score - ${this.game.score}`);
+    console.log(`Player nickname - ${this.game.hero.name}`);
+    console.log('\n');
+    console.log(`                    Created by ${yourTeamName} `);
   }
 }
 
