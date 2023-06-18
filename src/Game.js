@@ -1,6 +1,9 @@
 // Импортируем всё необходимое.
 // Или можно не импортировать,
 // а передавать все нужные объекты прямо из run.js при инициализации new Game().
+
+const sound = require('play-sound')((opts = {}));
+
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
 // const Boomerang = require('./game-models/Boomerang');
@@ -12,13 +15,16 @@ const Boomerang = require('./game-models/Boomerang');
 
 class Game {
   constructor({ trackLength }) {
-    this.trackLength = trackLength; //h
+
+    this.trackLength = trackLength; // h
+
     this.boomerang = new Boomerang(trackLength);
     this.hero = new Hero({ position: 0, boomerang: this.boomerang });
     this.enemy = new Enemy(trackLength);
     this.view = new View(this);
     this.track = [];
     this.regenerateTrack();
+    this.score = 0;
   }
 
   regenerateTrack() {
@@ -36,9 +42,9 @@ class Game {
   }
 
   check() {
-    if (this.hero.position === this.enemy.position) {
-      this.hero.die();
-    }
+    // удаляю жизни с помощью POP()
+    if (this.hero.position === this.enemy.position) this.hero.lives.pop(); 
+    if (this.hero.lives.length <= 0) this.hero.die();
   }
 
   play() {
@@ -59,16 +65,20 @@ class Game {
     }, 100); // Вы можете настроить частоту обновления игрового цикла
   }
 
+  // изменил вызов метода c this.die на this.check
+
   handleCollisions() {
     if (this.hero.position === this.enemy.position) {
-      this.hero.die();
+      // this.lives -= 1;
+      this.check();
     }
 
     if (this.boomerang.position === this.enemy.position) {
       this.enemy.die();
-      // Обнуляем позицию бумеранга после столкновения с врагом
-      // this.boomerang.position = -1;
-      this.enemy = new Enemy(this.trackLength); // Создаем нового врага
+      // console.log(`${this.lives}`);
+      this.score += 1;
+      this.boomerang.position = -1;
+      /* this.enemy = new Enemy(this.trackLength); // Создаем нового врага */
     }
   }
 }
