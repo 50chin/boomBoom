@@ -2,14 +2,12 @@
 const sound = require('play-sound')((opts = {}));
 
 class Hero {
-
   constructor({
     position,
     boomerang,
     lives = ['1', '2', '3'],
     name = 'Игрок',
   }) {
-
     this.skin = '👮';
     this.position = position;
     this.boomerang = boomerang;
@@ -27,6 +25,16 @@ class Hero {
     this.position += 1;
   }
 
+  // moveUp() {
+  //   // Идём вверх.
+  //   this.position -= 30;
+  // }
+
+  // moveDown() {
+  //   // Идём вниз.
+  //   this.position += 30;
+  // }
+
   attack() {
     // Атакуем.
     this.boomerang.position = this.position + 1; // Устанавливаем начальную позицию бумеранга
@@ -35,7 +43,6 @@ class Hero {
   }
 
   die() {
-    // if (this.hero.position === this.enemy.position) this.lives -= 1;
     this.skin = '💀';
     sound.play('src/sounds/inecraft_zombie_aaa.wav');
     console.log(`
@@ -52,7 +59,6 @@ class Hero {
                        ┈┈▏╰┻┻┻┻▏▕▂▂▂╱┈┈
                        ┈┈╲▂▂▂▂▂▏┈┈┈┈┈┈┈
         `);
-);
     process.exit();
   }
 }
