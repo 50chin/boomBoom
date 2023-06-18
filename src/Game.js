@@ -1,7 +1,9 @@
 // Импортируем всё необходимое.
 // Или можно не импортировать,
 // а передавать все нужные объекты прямо из run.js при инициализации new Game().
+
 const sound = require('play-sound')((opts = {}));
+
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
 // const Boomerang = require('./game-models/Boomerang');
@@ -15,7 +17,9 @@ let playerName = '';
 
 class Game {
   constructor({ trackLength }) {
+
     this.trackLength = trackLength; // h
+
     this.boomerang = new Boomerang(trackLength);
     this.hero = new Hero({ position: 0, boomerang: this.boomerang });
     this.enemy = new Enemy(trackLength);
