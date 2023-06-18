@@ -9,8 +9,8 @@ class Hero {
     lives = ['1', '2', '3'],
     name = 'Игрок',
   }) {
-  constructor({ position, boomerang, lives = 3 }) {
-    this.skin = '🤠';
+
+    this.skin = '👮';
     this.position = position;
     this.boomerang = boomerang;
     this.lives = lives;
@@ -31,12 +31,13 @@ class Hero {
     // Атакуем.
     this.boomerang.position = this.position + 1; // Устанавливаем начальную позицию бумеранга
     this.boomerang.fly();
+    sound.play('src/sounds/metanie-noja-v-stenu.wav');
   }
 
   die() {
     // if (this.hero.position === this.enemy.position) this.lives -= 1;
     this.skin = '💀';
-    // sound.play('src/sounds/inecraft_zombie_aaa.wav');
+    sound.play('src/sounds/inecraft_zombie_aaa.wav');
     console.log(`
     └┐░░█░█░█▀█░█░█░░┌┘░░█▀█░█▀█░█▀▀░░┌┘░░█▀▄░█▀▀░█▀█░█▀▄░┌┘
     └┐░░▀█▀░█░█░█░█░░┌┘░░█▀█░█▀▄░█▀▀░░┌┘░░█░█░█▀▀░█▀█░█░█░┌┘

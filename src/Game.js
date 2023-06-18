@@ -9,7 +9,9 @@ const Enemy = require('./game-models/Enemy');
 // const Boomerang = require('./game-models/Boomerang');
 const View = require('./View');
 const Boomerang = require('./game-models/Boomerang');
+const readlineSync = require('readline-sync');
 
+let playerName = '';
 // Основной класс игры.
 // Тут будут все настройки, проверки, запуск.
 
@@ -43,11 +45,15 @@ class Game {
 
   check() {
     // удаляю жизни с помощью POP()
-    if (this.hero.position === this.enemy.position) this.hero.lives.pop(); 
+    if (this.hero.position === this.enemy.position) this.hero.lives.pop();
+    sound.play('src/sounds/inecraft_zombie_.wav');
     if (this.hero.lives.length <= 0) this.hero.die();
   }
 
   play() {
+    playerName = readlineSync.question('What is your name? ');
+    process.stdin.resume(); // решить конфликт между пакетами npm
+    this.hero.name = playerName;
     setInterval(() => {
       // Let's play!
       this.handleCollisions();
@@ -69,7 +75,6 @@ class Game {
 
   handleCollisions() {
     if (this.hero.position === this.enemy.position) {
-      // this.lives -= 1;
       this.check();
     }
 
